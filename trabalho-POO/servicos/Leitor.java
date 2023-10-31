@@ -8,6 +8,6 @@ public interface Leitor {
      Estoque lerEstoque() throws IOException;
      Fazenda lerFazenda() throws IOException;
      Plantacao lerPlantacao() throws IOException;
-     Colheita lerColheita() throws InterruptedException, IOException;
+     Colheita lerColheita() throws IOException;
      Transporte lerTransporte() throws IOException;
 }

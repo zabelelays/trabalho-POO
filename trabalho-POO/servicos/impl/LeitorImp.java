@@ -1,7 +1,9 @@
+//isabelle lays r.a 2525810
 package fazenda.Colheita.servicos.impl;
 
 import fazenda.Colheita.entidades.*;
 import fazenda.Colheita.servicos.Leitor;
+import fazenda.Colheita.utils.NumConveter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,89 +11,121 @@ import java.io.InputStreamReader;
 import java.time.Instant;
 import java.util.Date;
 
-public class LeitorImp implements Leitor{
+public class LeitorImp implements Leitor {
 
     BufferedReader reader = new BufferedReader(
             new InputStreamReader(System.in));
+
     public Estoque lerEstoque() throws IOException {
-            System.out.println("Digite a quantidade armazenada:");
-            var quantidadeArmazenada = reader.readLine();
-            System.out.println("Digite a data de armazenagem:");
-            String dataArmazenagem = reader.readLine();
-            System.out.println("Digite a data de saída:");
-            String dataSaida = reader.readLine();
-            System.out.println("Digite o ID do cultivo:");
-            var idCultivo = reader.readLine();
-            Estoque estoque = new Estoque();
-            estoque.setDataDaArmazenagem(dataArmazenagem);
-            estoque.setDataDaSaida(dataSaida);
-            estoque.setIdCultivo(Integer.valueOf(idCultivo));
-            estoque.setQuantidadeArmazenado(Integer.valueOf(quantidadeArmazenada));
-            return estoque;
-        }
+        Estoque estoque = new Estoque();
+        System.out.println("Digite a quantidade armazenada:");
+        estoque.setQuantidadeArmazenado(NumConveter.intConverter(reader.readLine()));
+        System.out.println("Digite a data de armazenagem:");
+        estoque.setDataDaArmazenagem(reader.readLine());
+        System.out.println("Digite a data de saída:");
+        estoque.setDataDaSaida(reader.readLine());
+        System.out.println("Digite o ID do cultivo:");
+        estoque.setIdCultivo(NumConveter.intConverter(reader.readLine()));
+        return estoque;
+    }
 
     @Override
     public Fazenda lerFazenda() throws IOException {
-            System.out.println("Digite o nome da fazenda:");
-            String nomeFazenda = reader.readLine();
-            System.out.println("Digite a localização da fazenda:");
-            String localizacaoFazenda = reader.readLine();
-            System.out.println("Digite o tamanho da fazenda:");
-            String tamanhoFazenda = reader.readLine();
-            System.out.println("Digite o tipo de solo da fazenda:");
-            String tipoSoloFazenda = reader.readLine();
-            Fazenda fazenda = new Fazenda(nomeFazenda, localizacaoFazenda, tamanhoFazenda, tipoSoloFazenda);
-            return fazenda;
-        }
+        Fazenda fazenda = new Fazenda();
+        System.out.println("Digite o nome da fazenda:");
+        fazenda.setNome(reader.readLine());
+        System.out.println("Digite a localização da fazenda:");
+        fazenda.setLocalizacao(reader.readLine());
+        System.out.println("Digite o tamanho da fazenda:");
+        fazenda.setTamanho(NumConveter.intConverter(reader.readLine()));
+        System.out.println("Digite o tipo de solo da fazenda:");
+        fazenda.setTipoDeSolo(reader.readLine());
+        System.out.println("Cadastro de estoque: ");
+        fazenda.setEstoque(lerEstoque());
+        adicionarPlantacoes(fazenda);
+        adicionarColheita(fazenda);
+        return fazenda;
+    }
 
     @Override
     public Plantacao lerPlantacao() throws IOException {
-            System.out.println("Digite a data do plantio:");
-            String dataPlantio = reader.readLine();
-            System.out.println("Digite o tipo de cultura:");
-            String tipoCultura = reader.readLine();
-            System.out.println("Digite a área do plantio:");
-            var areaPlantio = reader.readLine();
-            Plantacao plantacao = new Plantacao();
-            plantacao.setDataDoPlantio(dataPlantio);
-            plantacao.setTipoDeCultura(tipoCultura);
-            plantacao.setAreaDoPlantio(Float.valueOf(areaPlantio));
-            return plantacao;
-        }
+        Plantacao plantacao = new Plantacao();
+        System.out.println("Digite a data do plantio:");
+        plantacao.setDataDoPlantio(reader.readLine());
+        System.out.println("Digite o tipo de cultura:");
+        plantacao.setTipoDeCultura(reader.readLine());
+        System.out.println("Digite a área do plantio:");
+        plantacao.setAreaDoPlantio(NumConveter.intConverter(reader.readLine()));
+        return plantacao;
+    }
 
     @Override
-    public Colheita lerColheita() throws InterruptedException, IOException {
-            System.out.println("Digite a quantidade colhida:");
-            var quantidadeColhida = reader.readLine();
-            System.out.println("Digite o preço:");
-            var preco = reader.readLine();
-            System.out.println("Digite o tipo de colheita:");
-            String tipo = reader.readLine();
-            Colheita colheita = new Colheita();
-            colheita.setTipo(tipo);
-            colheita.setQuantidadeColhida(Integer.parseInt(quantidadeColhida));
-            colheita.setPreco(Float.parseFloat(preco));
-            return colheita;
-        }
+    public Colheita lerColheita() throws IOException {
+        Colheita colheita = new Colheita();
+        System.out.println("Digite a quantidade colhida:");
+        colheita.setQuantidadeColhida(NumConveter.intConverter(reader.readLine()));
+        System.out.println("Digite o preço:");
+        colheita.setPreco(NumConveter.intConverter(reader.readLine()));
+        System.out.println("Digite o tipo de colheita:");
+        colheita.setTipo(reader.readLine());
+        return colheita;
+    }
 
     @Override
     public Transporte lerTransporte() throws IOException {
-            System.out.println("Digite o código de frete:");
-            var codigoFrete = reader.readLine();
-            System.out.println("Digite a origem");
-            String origem = reader.readLine();
-            System.out.println("Digite o destino:");
-            String destino = reader.readLine();
-            System.out.println("Digite o tempo de deslocamento em horas:");
-            var tempoDeslocamento = reader.readLine();
-            System.out.println("Digite o valor do frete em reais:");
-            var valorFrete = reader.readLine();
-            Transporte transporte = new Transporte();
-            transporte.setCodigoFrete(Integer.parseInt(codigoFrete));
-            transporte.setOrigem(origem);
-            transporte.setDestino(destino);
-            transporte.setTempoDeDeslocamento(Integer.parseInt(tempoDeslocamento));
-            transporte.setValorFrete(Float.parseFloat(valorFrete));
-            return transporte;
+        Transporte transporte = new Transporte();
+        System.out.println("Digite o código de frete:");
+        transporte.setCodigoFrete(NumConveter.intConverter(reader.readLine()));
+        System.out.println("Digite o tempo de deslocamento em horas:");
+        transporte.setTempoDeDeslocamento(NumConveter.intConverter(reader.readLine()));
+        System.out.println("Digite o valor do frete em reais:");
+        transporte.setValorFrete(NumConveter.intConverter(reader.readLine()));
+        System.out.println("Digite a origem");
+        transporte.setOrigem(reader.readLine());
+        System.out.println("Digite o destino:");
+        transporte.setDestino(reader.readLine());
+        transporte.setMotorista(lerMotorista());
+        return transporte;
+    }
+
+    public Motorista lerMotorista() throws IOException {
+        Motorista motorista = new Motorista();
+        System.out.println("Digite a idade do motorista");
+        motorista.setIdade(NumConveter.intConverter(reader.readLine()));
+        System.out.println("Digite o nome do motorista");
+        motorista.setNome(reader.readLine());
+        System.out.println("Digite o documento do motorista");
+        motorista.setDocumento(reader.readLine());
+        System.out.println("Digite a data de nascimento do motorista");
+        motorista.setDataNascimento(reader.readLine());
+        System.out.println("Digite o endereco do motorista");
+        motorista.setEndereco(reader.readLine());
+        System.out.println("Digite o cnh do motorista");
+        motorista.setCodigoMotorista(reader.readLine());
+        System.out.println("Digite o codigo do motorista");
+        motorista.setCodigoMotorista(reader.readLine());
+        return motorista;
+    }
+
+    public void adicionarPlantacoes(Fazenda fazenda) throws IOException {
+        System.out.println("Gostaria de adicionar uma plantacao?");
+        String continuar = reader.readLine();
+        while (!continuar.equals("nao")) {
+            var plantacao = lerPlantacao();
+            fazenda.addPlantacao(plantacao);
+            System.out.println("Gostaria de adicionar mais plantações?");
+            continuar = reader.readLine();
+        }
+    }
+
+    public void adicionarColheita(Fazenda fazenda) throws IOException {
+        System.out.println("Gostaria de adicionar uma colheita?");
+        String continuar = reader.readLine();
+        while (!continuar.equals("nao")) {
+            var colheita = lerColheita();
+            fazenda.addColheita(colheita);
+            System.out.println("Gostaria de adicionar mais colheitas?");
+            continuar = reader.readLine();
+        }
     }
 }

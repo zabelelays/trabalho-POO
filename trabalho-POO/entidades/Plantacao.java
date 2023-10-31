@@ -1,3 +1,4 @@
+//isabelle lays 2525810
 package fazenda.Colheita.entidades;
 
 
@@ -46,9 +47,9 @@ public class Plantacao {
     @Override
     public String toString() {
         return "Plantacao{" +
-                "tipoDeCultura='" + tipoDeCultura + '\'' +
-                ", dataDoPlantio=" + dataDoPlantio +
-                ", areaDoPlantio=" + areaDoPlantio +
+                "tipoDeCultura='" + tipoDeCultura + '\n' +
+                ", dataDoPlantio=" + dataDoPlantio + '\n' +
+                ", areaDoPlantio=" + areaDoPlantio + '\n' +
                 '}';
     }
 }

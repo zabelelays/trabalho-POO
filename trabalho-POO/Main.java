@@ -1,27 +1,22 @@
 package fazenda.Colheita;//*isabelle lays r.a 2525810
 
+import fazenda.Colheita.servicos.impl.MenuImp;
+
 import java.io.IOException;
-
-
-import fazenda.Colheita.servicos.impl.LeitorImp;
 
 public class Main {
     public static void main(String[] args) {
-        LeitorImp leitor = new LeitorImp();
+        MenuImp menu = new MenuImp();
 
         try {
-            System.out.println(leitor.lerEstoque());
-            System.out.println(leitor.lerEstoque());
-            System.out.println(leitor.lerPlantacao());
-            System.out.println(leitor.lerTransporte());
-            System.out.println(leitor.lerFazenda());
+          menu.exibirOpcoes();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
-
 
     }
 
 }
+
 
 

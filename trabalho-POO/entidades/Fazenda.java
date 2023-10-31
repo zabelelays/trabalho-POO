@@ -1,16 +1,25 @@
-package fazenda.Colheita.entidades;//*isabelle lays r.a 2525810
+
+package fazenda.Colheita.entidades; //*isabelle lays r.a 2525810
 
 import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Fazenda implements Serializable {
     private String nome;
+
     private String localizacao;
-    private String tamanho;
+    private int tamanho;
     private String tipoDeSolo;
 
-    public Fazenda(String nome, String localizacao, String tamanho, String tipoDeSolo) {
+    private Estoque estoque;
+
+    private List<Plantacao> plantacoes = new ArrayList<>();
+
+    private List<Colheita> colheitas = new ArrayList<>();
+
+    public Fazenda(String nome, String localizacao, int tamanho, String tipoDeSolo) {
         this.nome = nome;
         this.localizacao = localizacao;
         this.tamanho = tamanho;
@@ -36,11 +45,11 @@ public class Fazenda implements Serializable {
         this.localizacao = localizacao;
     }
 
-    public String getTamanho() {
+    public int getTamanho() {
         return tamanho;
     }
 
-    public void setTamanho(String tamanho) {
+    public void setTamanho(int tamanho) {
         this.tamanho = tamanho;
     }
 
@@ -52,16 +61,48 @@ public class Fazenda implements Serializable {
         this.tipoDeSolo = tipoDeSolo;
     }
 
+    public void addPlantacao(Plantacao plantacao){
+        plantacoes.add(plantacao);
+    }
+
+    public void removePlantacaoes(Plantacao plantacao){
+        plantacoes.remove(plantacao);
+    }
+
+    public void addColheita(Colheita colheita){
+        colheitas.add(colheita);
+    }
+
+    public void removeColheita(Colheita colheita){
+        colheitas.remove(colheita);
+    }
+
+    public List<Plantacao> getPlantacoes() {
+        return plantacoes;
+    }
+
+    public List<Colheita> getColheitas() {
+        return colheitas;
+    }
+
+    public Estoque getEstoque() {
+        return estoque;
+    }
+
+    public void setEstoque(Estoque estoque) {
+        this.estoque = estoque;
+    }
+
     @Override
     public String toString() {
-        String retorno;
-
-        retorno = "--------------------------\n" +
-                  "Nome da fazenda: " + this.getNome() + "\n" +
-                  "--------------------------\n" +
-                  "Localizacao: " + this.getLocalizacao() + "\n" +
-                  "Tamanho: " + this.getTamanho() + "\n" +
-                  "Tipo de solo: " + this.getTipoDeSolo() + "\n\n";
-        return retorno;
+        return "Fazenda{" +
+                "nome='" + nome + '\n' +
+                ", localizacao='" + localizacao + '\n' +
+                ", tamanho='" + tamanho + '\n' +
+                ", tipoDeSolo='" + tipoDeSolo + '\n' +
+                ", estoque=" + estoque + '\n' +
+                ", plantacoes=" + plantacoes + '\n' +
+                ", colheitas=" + colheitas + '\n' +
+                '}';
     }
 }

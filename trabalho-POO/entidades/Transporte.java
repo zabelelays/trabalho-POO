@@ -2,8 +2,11 @@
 package fazenda.Colheita.entidades;
 
 
+
 public class Transporte {
     private int codigoFrete;
+
+    private Motorista motorista;
 
     private String origem;
 
@@ -17,12 +20,13 @@ public class Transporte {
     public Transporte() {
     }
 
-    public Transporte(int codigoFrete, String origem, String destino, int tempoDeDeslocamento, float valorFrete) {
+    public Transporte(int codigoFrete, String origem, String destino, int tempoDeDeslocamento, float valorFrete, Motorista motorista) {
         this.codigoFrete = codigoFrete;
         this.origem = origem;
         this.destino = destino;
         this.tempoDeDeslocamento = tempoDeDeslocamento;
         this.valorFrete = valorFrete;
+        this.motorista = motorista;
     }
 
     public int getCodigoFrete() {
@@ -65,14 +69,23 @@ public class Transporte {
         this.valorFrete = valorFrete;
     }
 
+    public Motorista getMotorista() {
+        return motorista;
+    }
+
+    public void setMotorista(Motorista motorista) {
+        this.motorista = motorista;
+    }
+
     @Override
     public String toString() {
-        return "Transporte{" +
-                "codigoFrete=" + codigoFrete +
-                ", origem='" + origem + '\'' +
-                ", destino='" + destino + '\'' +
-                ", tempoDeDeslocamento='" + tempoDeDeslocamento + '\'' +
-                ", valorFrete=" + valorFrete +
+        return "Transporte{" + '\n' +
+                "codigoFrete=" + codigoFrete + '\n' +
+                ", motorista=" + motorista + '\n' +
+                ", origem='" + origem + '\n' +
+                ", destino='" + destino + '\n' +
+                ", tempoDeDeslocamento=" + tempoDeDeslocamento + '\n' +
+                ", valorFrete=" + valorFrete + '\n' +
                 '}';
     }
 }

@@ -54,10 +54,10 @@ public class Estoque {
     @Override
     public String toString() {
         return "Estoque{" +
-                "dataDaArmazenagem=" + dataDaArmazenagem +
-                ", dataDaSaida=" + dataDaSaida +
-                ", quantidadeArmazenado=" + quantidadeArmazenado +
-                ", idCultivo=" + idCultivo +
+                "dataDaArmazenagem=" + dataDaArmazenagem + '\n' +
+                ", dataDaSaida=" + dataDaSaida + '\n' +
+                ", quantidadeArmazenado=" + quantidadeArmazenado + '\n' +
+                ", idCultivo=" + idCultivo +  '\n' +
                 '}';
     }
 
